@@ -6,6 +6,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
+// import React from '../node_modules/react/umd/react.development.js';
+// import ReactDom from '../node_modules/react-dom/umd/react-dom.development.js';
+
+
 console.log('React', React)
 console.log('ReactDom', ReactDom)
 

@@ -19,11 +19,13 @@ app.use(async ctx => {
     ctx.type = 'application/javascript';
     const _path = path.join(__dirname, url);
     const content = fs.readFileSync(_path, 'utf-8');
-    ctx.body = rewriteImportPath(content);
+    ctx.body = content;
+    // ctx.body = rewriteImportPath(content);
     return;
   }
 
   // 第三方模块加载
+  // VITE原理: 会进行打包，依赖预处理，路径补全
   if(url.startsWith('/@modules')) {
     const moduleName = url.replace('/@modules', '');
     const prefix = path.join(__dirname, './node_modules', moduleName);
@@ -44,7 +46,10 @@ function rewriteImportPath(content) {
     if (s2.startsWith('.') || s2.startsWith('./') || s2.startsWith('../')) {
       return s1; 
     } else { // 第三方模块
-      return ` from '/@modules/${s2}'`;
+      const path = `'/@modules/${s2}'`;
+      console.log('s2', s2)
+      console.log('path', path)
+      return ` from ${path}`;
     }
   })
 }
