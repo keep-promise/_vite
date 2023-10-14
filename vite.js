@@ -19,8 +19,8 @@ app.use(async ctx => {
     ctx.type = 'application/javascript';
     const _path = path.join(__dirname, url);
     const content = fs.readFileSync(_path, 'utf-8');
-    ctx.body = content;
-    // ctx.body = rewriteImportPath(content);
+    // ctx.body = content;
+    ctx.body = rewriteImportPath(content);
     return;
   }
 
